@@ -18,7 +18,7 @@ class UI:
 
     @staticmethod
     def action_menu():
-        print "|  Character  |     Action      |      Effect                                  |     Counteraction    |"
+        print "|  Character  |     Action      |                 Effect                       |     Counteraction    |"
         print "|   -------   | 1 - Income      | Take 1 coin                                  |           X          |"
         print "|   -------   | 2 - Foreign Aid | Take 2 coins                                 |           X          |"
         print "|   -------   | 3 - Coup        | Pay 7 coins / Chose player to lose influence |           X          |"

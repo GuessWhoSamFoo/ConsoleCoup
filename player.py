@@ -10,27 +10,41 @@ class Player:
 
     def income(self):
         self.coins += 1
+        return True
 
     def foreign_aid(self):
         self.coins += 2
+        return True
 
     def coup(self):
         if self.coins >= 7:
             self.coins -= 7
+            player_num = int(raw_input("Choose player number to lose influence: "))
+            if player_num not in range(2,5):
+                print "Not a valid player number!"
+                return False
+            player[player_num - 1].influence.pop()
+            return True
         else:
-            print "Not enough coins!"
-        # Decide how to make another player lose influence
-        player_num = int(raw_input("Choose player number to lose influence: "))
-        player[player_num].influence.pop()
+            print "Not enough coins! Try another action."
+            return False
 
     def tax(self):
         self.coins += 3
+        return True
 
     def assassinate(self):
         if self.coins >= 3:
             self.coins -= 3
+            player_num = int(raw_input("Choose player number to lose assassinate: "))
+            if player_num not in range(2,5):
+                print "Not a valid player number!"
+                return False
+            player[player_num - 1].influence.pop()
+            return True
         else:
-            print "Not enough coins!"
+            print "Not enough coins! Try another action."
+            return False
 
     def exchange(self):
         # Pick from own influence
@@ -51,11 +65,16 @@ class Player:
         # Replace unselected cards in deck
         for card in available_cards:
             Deck().pile[card] += 1
+        return True
 
-    def steal(self, target_player):
+    def steal(self):
         self.coins += 2
-        target_player.coin -= 2
-        # Another player loses two coins
+        player_num = int(raw_input("Choose player number to steal from: "))
+        if player_num not in range(2,5):
+            print "Not a valid player number!"
+            return False
+        player[player_num - 1].coins -= 2
+        return True
 
     def block(self):
         if not self.turn:
@@ -70,6 +89,7 @@ player_4 = Player(False, 2, Deck().draw(2))
 player = [player_1, player_2, player_3, player_4]
 
 if __name__ == '__main__':
+    # Testing methods
     Player(False, 2, [Deck().draw(2)])
     print Player.influence
 
